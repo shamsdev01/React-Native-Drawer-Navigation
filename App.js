@@ -1,15 +1,40 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// import { createDrawerNavigator } from '@react-navigation/drawer';
 import {Ionicons} from '@expo/vector-icons'
 import WelcomeScreen from './screens/WelcomeScreen';
 import UserScreen from './screens/UserScreen';
 
-const Drawer = createDrawerNavigator();
+// const Drawer = createDrawerNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-        <Drawer.Navigator  screenOptions={{
+      <Tab.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: '#3c0a6b'
+      }}>
+        <Tab.Screen 
+        name='Home' 
+        component={WelcomeScreen}
+        options={{
+          tabBarIcon : ({color,size}) => (
+            <Ionicons name='home' size={24} color={color}/>
+          )
+        }}
+        />
+        <Tab.Screen 
+        name='User' 
+        component={UserScreen}
+        options={{
+          tabBarIcon: ({size,color}) => (
+            <Ionicons name='person' size={size} color={color}/>
+          )
+        }}
+        />
+      </Tab.Navigator>
+        {/* <Drawer.Navigator  screenOptions={{
            headerStyle : {backgroundColor:'#44044dff'},
             headerTintColor:'#f3ddbdfb',
           drawerStyle:{backgroundColor: '#ccc'}, drawerActiveBackgroundColor:'#44044d62',
@@ -24,7 +49,7 @@ export default function App() {
               <Ionicons name='person' size={size} color={color}/>
             )
           }}/>
-        </Drawer.Navigator>
+        </Drawer.Navigator> */}
     </NavigationContainer>
   );
 }
